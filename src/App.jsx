@@ -300,12 +300,12 @@ const BeforeAfterSection = ({ setCurrentPage }) => {
     {
       title: "Rénovation Intégrale Habitacle",
       desc: "Détachage des sièges, aspiration en profondeur des moquettes et remise à neuf des plastiques pour retrouver le confort du premier jour.",
-      image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=800&q=80"
+      image: "/voiture.jpg"
     },
     {
       title: "Sauvetage Canapé Tissu",
       desc: "Élimination des taches incrustées (liquides, nourriture) et traitement anti-odeurs. Le tissu retrouve sa couleur d'origine et sa souplesse.",
-      image: "https://images.unsplash.com/photo-1568992687947-868a62a9f521?auto=format&fit=crop&w=800&q=80"
+      image: "/canape.jpg"
     }
   ];
 
