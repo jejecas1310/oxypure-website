@@ -70,21 +70,23 @@ const Navbar = ({ currentPage, setCurrentPage }) => {
 
       {/* Menu Mobile */}
       {isOpen && (
-        <div className="md:hidden bg-white/95 backdrop-blur-xl border-t border-slate-100 px-2 pt-2 pb-4 space-y-1 shadow-lg absolute w-full left-0 top-20">
-          {currentPage === 'home' ? (
-            <>
-              <a href="#services" onClick={() => setIsOpen(false)} className="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-blue-600 hover:bg-slate-50">Services</a>
-              <a href="#methodes" onClick={() => setIsOpen(false)} className="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-blue-600 hover:bg-slate-50">Expertise</a>
-              <a href="#avant-apres" onClick={() => setIsOpen(false)} className="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-blue-600 hover:bg-slate-50">Avant / Après</a>
-            </>
-          ) : (
-            <button onClick={() => { setCurrentPage('home'); setIsOpen(false); }} className="w-full text-left block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-blue-600 hover:bg-slate-50">Retour à l'accueil</button>
-          )}
-          <div className="pt-2 px-3">
-            <button onClick={() => { setCurrentPage('devis'); setIsOpen(false); }} className="w-full bg-blue-600 text-white px-4 py-3 rounded-xl font-medium flex items-center justify-center shadow-md">
-              <Phone className="w-4 h-4 mr-2" />
-              Devis gratuit
-            </button>
+        <div className="md:hidden bg-white/95 backdrop-blur-xl border-t border-slate-100 px-2 pt-2 pb-4 shadow-lg absolute w-full left-0 top-20">
+          <div className="px-4 py-2 space-y-1">
+            {currentPage === 'home' ? (
+              <>
+                <a href="#services" onClick={() => setIsOpen(false)} className="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-blue-600 hover:bg-slate-50">Services</a>
+                <a href="#methodes" onClick={() => setIsOpen(false)} className="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-blue-600 hover:bg-slate-50">Expertise</a>
+                <a href="#avant-apres" onClick={() => setIsOpen(false)} className="block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-blue-600 hover:bg-slate-50">Avant / Après</a>
+              </>
+            ) : (
+              <button onClick={() => { setCurrentPage('home'); setIsOpen(false); }} className="w-full text-left block px-3 py-2 rounded-md text-base font-medium text-slate-700 hover:text-blue-600 hover:bg-slate-50">Retour à l'accueil</button>
+            )}
+            <div className="pt-2 px-3">
+              <button onClick={() => { setCurrentPage('devis'); setIsOpen(false); }} className="w-full bg-blue-600 text-white px-4 py-3 rounded-xl font-medium flex items-center justify-center shadow-md">
+                <Phone className="w-4 h-4 mr-2" />
+                Devis gratuit
+              </button>
+            </div>
           </div>
         </div>
       )}
@@ -127,7 +129,6 @@ const HeroSection = ({ setCurrentPage }) => {
             </p>
           </div>
         </div>
-
       </div>
     </div>
   );
@@ -216,7 +217,7 @@ const MethodsSection = () => {
       icon: <Brush className="w-5 h-5" />,
       title: "Action Mécanique",
       subtitle: "Détachage ciblé",
-      desc: "Les taches tenaces (café, boue, graisse) ne nous résistent pas. Nous appliquons un shampoing spécifique suivi d'un brossage doux pour détacher la fibre sans l'abîmer avant le rinçage final.",
+      desc: "Les taches tenaces (café, boue, graisse) ne nous résistent pas. Nous appliquons un shampoing spécifique suivi d'un brossage doux (manuel ou à l'aide d'une brosse rotative) pour détacher la fibre sans l'abîmer avant le rinçage final.",
       image: "https://images.unsplash.com/photo-1581428982868-e410dd1b0824?auto=format&fit=crop&w=800&q=80"
     }
   ];
@@ -382,9 +383,7 @@ const Footer = ({ setCurrentPage }) => {
           <div className="md:col-span-5">
             <div className="flex items-center group cursor-pointer mb-6" onClick={() => setCurrentPage('home')}>
               <div className="bg-gradient-to-tr from-blue-600 to-cyan-400 p-2 rounded-xl mr-3 shadow-lg shadow-cyan-200">
-                <div className="bg-gradient-to-tr from-blue-600 to-cyan-400 p-2 rounded-xl mr-3 shadow-lg shadow-cyan-200">
-                  <Droplets className="h-6 w-6 text-white" />
-                </div>
+                <Droplets className="h-6 w-6 text-white" />
               </div>
               <span className="font-extrabold text-2xl text-slate-800 tracking-tight">
                 Oxy<span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">pure</span>
@@ -630,7 +629,7 @@ const LegalNotice = () => (
 
         <section>
           <h2 className="text-xl font-bold text-slate-800 mb-3">4. Responsabilité</h2>
-          <p>Oxypure s'efforce de fournir sur le site des informations aussi précises que possible. Toutefois, l'entreprise ne pourra être tenue responsable des omissions, des inexactitudes et des carenents dans la mise à jour.</p>
+          <p>Oxypure s'efforce de fournir sur le site des informations aussi précises que possible. Toutefois, l'entreprise ne pourra être tenue responsable des omissions, des inexactitudes et des carences dans la mise à jour.</p>
         </section>
       </div>
     </div>
@@ -902,7 +901,7 @@ const BookingModal = ({ isOpen, onClose, bookingContext }) => {
                         </button>
                       ))}
                     </div>
-                    <input type="text" className="hidden" required value={selectedTime} readOnly />
+                    <input type="text" className="hidden" required value={selectedTime} onChange={() => {}} />
                   </div>
                 )}
               </div>
