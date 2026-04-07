@@ -1,5 +1,30 @@
-import React, { useState } from 'react';
-import { Menu, X, Droplets, Sparkles, Phone, ArrowRight, Car, Home, Shield, ThermometerSun, Brush, CheckCircle2, ChevronRight, Mail, MapPin, Instagram, Facebook, Check, Calendar, User, Clock, Map, Navigation, AlertCircle } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { 
+  Menu, 
+  X, 
+  Droplets, 
+  Sparkles, 
+  Phone, 
+  ArrowRight, 
+  Car, 
+  Home, 
+  Shield, 
+  ThermometerSun, 
+  Brush, 
+  CheckCircle2, 
+  ChevronRight, 
+  Mail, 
+  MapPin, 
+  Instagram, 
+  Facebook, 
+  Check, 
+  Calendar, 
+  User, 
+  Clock, 
+  Map, 
+  Navigation, 
+  AlertCircle 
+} from 'lucide-react';
 
 // --- COMPOSANT NAVBAR (Glassmorphism) ---
 const Navbar = ({ currentPage, setCurrentPage }) => {
@@ -98,7 +123,7 @@ const HeroSection = ({ setCurrentPage }) => {
           {/* Texte de présentation de l'entreprise */}
           <div className="mt-16 pt-8 border-t border-slate-200/60 max-w-2xl mx-auto animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
             <p className="text-slate-500 leading-relaxed text-sm md:text-base">
-              <strong className="text-slate-700">MyNexvia</strong> est une jeune entreprise basée à Colleville-Montgomery, dans le Calvados. Spécialisée dans le soin et la rénovation des textiles, notre mission est d'allier exigence et matériel haute-technologie pour redonner vie à vos intérieurs. Nous intervenons directement chez vous ou sur votre lieu de travail pour vous offrir un résultat impeccable, sans compromis sur la qualité.
+              <strong className="text-slate-700 font-bold">Oxypure</strong> est une jeune entreprise basée à Colleville-Montgomery, dans le Calvados. Spécialisée dans le soin et la rénovation des textiles, notre mission est d'allier exigence et matériel haute-technologie pour redonner vie à vos intérieurs. Nous intervenons directement chez vous ou sur votre lieu de travail pour vous offrir un résultat impeccable, sans compromis sur la qualité.
             </p>
           </div>
         </div>
@@ -177,7 +202,7 @@ const MethodsSection = () => {
       icon: <Droplets className="w-5 h-5" />,
       title: "Injection-Extraction",
       subtitle: "Le lavage en profondeur",
-      desc: "Notre machine injecte une solution nettoyante professionnelle au cœur des fibres pour dissoudre la saleté incrustée, puis l'aspire instantanément avec les résidus. Résultat : des textiles éclatants, sans auréoles, qui sèchent en quelques heures.",
+      desc: "Notre machine injecte une solution nettoyante professionnelle au cœur des fibres pour dissoudre la saleté incrustée, puis l'aspire instantanément avec la saleté. Résultat : des textiles éclatants, sans auréoles, qui sèchent en quelques heures.",
       image: "https://images.unsplash.com/photo-1585144860106-998ca08293a5?auto=format&fit=crop&w=800&q=80"
     },
     {
@@ -191,7 +216,7 @@ const MethodsSection = () => {
       icon: <Brush className="w-5 h-5" />,
       title: "Action Mécanique",
       subtitle: "Détachage ciblé",
-      desc: "Les taches tenaces (café, boue, graisse) ne nous résistent pas. Nous appliquons un shampoing spécifique suivi d'un brossage doux (manuel ou à l'aide d'une brosse rotative) pour détacher la fibre sans l'abîmer avant le rinçage final.",
+      desc: "Les taches tenaces (café, boue, graisse) ne nous résistent pas. Nous appliquons un shampoing spécifique suivi d'un brossage doux pour détacher la fibre sans l'abîmer avant le rinçage final.",
       image: "https://images.unsplash.com/photo-1581428982868-e410dd1b0824?auto=format&fit=crop&w=800&q=80"
     }
   ];
@@ -357,7 +382,9 @@ const Footer = ({ setCurrentPage }) => {
           <div className="md:col-span-5">
             <div className="flex items-center group cursor-pointer mb-6" onClick={() => setCurrentPage('home')}>
               <div className="bg-gradient-to-tr from-blue-600 to-cyan-400 p-2 rounded-xl mr-3 shadow-lg shadow-cyan-200">
-                <Droplets className="h-6 w-6 text-white" />
+                <div className="bg-gradient-to-tr from-blue-600 to-cyan-400 p-2 rounded-xl mr-3 shadow-lg shadow-cyan-200">
+                  <Droplets className="h-6 w-6 text-white" />
+                </div>
               </div>
               <span className="font-extrabold text-2xl text-slate-800 tracking-tight">
                 Oxy<span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">pure</span>
@@ -403,7 +430,7 @@ const Footer = ({ setCurrentPage }) => {
                 <div className="p-2 bg-cyan-100 text-cyan-600 rounded-xl mr-4 group-hover:bg-cyan-500 group-hover:text-white transition-colors">
                   <Mail className="w-5 h-5" />
                 </div>
-                contact@mynexvia.fr
+                contact@oxypure.fr
               </li>
               <li className="flex items-start group text-slate-600 font-medium">
                 <div className="p-2 bg-slate-200 text-slate-600 rounded-xl mr-4 group-hover:bg-slate-700 group-hover:text-white transition-colors mt-1">
@@ -417,7 +444,7 @@ const Footer = ({ setCurrentPage }) => {
 
         <div className="pt-8 border-t border-white/50 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <div className="text-slate-500 text-sm font-medium">
-            © {new Date().getFullYear()} MyNexvia. Tous droits réservés.
+            © {new Date().getFullYear()} Oxypure. Tous droits réservés.
           </div>
           <div className="flex space-x-8 text-sm font-medium">
             <button onClick={() => handleNavClick('mentions')} className="text-slate-500 hover:text-blue-600 transition-colors">Mentions légales</button>
@@ -582,11 +609,11 @@ const LegalNotice = () => (
       <div className="space-y-8 text-slate-600 leading-relaxed">
         <section>
           <h2 className="text-xl font-bold text-slate-800 mb-3">1. Éditeur du site</h2>
-          <p>Nom de l'entreprise : MyNexvia</p>
+          <p>Nom de l'entreprise : Oxypure</p>
           <p>Statut juridique : Micro-entreprise (Auto-entrepreneur)</p>
           <p>Siège social : [Votre adresse postale]</p>
           <p>SIRET : [Votre numéro SIRET]</p>
-          <p>Email : contact@mynexvia.fr</p>
+          <p>Email : contact@oxypure.fr</p>
           <p>Téléphone : 06 12 34 56 78</p>
         </section>
 
@@ -598,12 +625,12 @@ const LegalNotice = () => (
 
         <section>
           <h2 className="text-xl font-bold text-slate-800 mb-3">3. Propriété intellectuelle</h2>
-          <p>Le contenu de ce site web (textes, images, éléments graphiques) est la propriété exclusive de MyNexvia. Toute reproduction, distribution ou utilisation non autorisée est strictement interdite.</p>
+          <p>Le contenu de ce site web (textes, images, éléments graphiques) est la propriété exclusive de Oxypure. Toute reproduction, distribution ou utilisation non autorisée est strictement interdite.</p>
         </section>
 
         <section>
           <h2 className="text-xl font-bold text-slate-800 mb-3">4. Responsabilité</h2>
-          <p>MyNexvia s'efforce de fournir sur le site des informations aussi précises que possible. Toutefois, l'entreprise ne pourra être tenue responsable des omissions, des inexactitudes et des carences dans la mise à jour.</p>
+          <p>Oxypure s'efforce de fournir sur le site des informations aussi précises que possible. Toutefois, l'entreprise ne pourra être tenue responsable des omissions, des inexactitudes et des carenents dans la mise à jour.</p>
         </section>
       </div>
     </div>
@@ -633,7 +660,7 @@ const PrivacyPolicy = () => (
 
         <section>
           <h2 className="text-xl font-bold text-slate-800 mb-3">4. Vos droits</h2>
-          <p>Conformément à la loi "Informatique et Libertés" et au RGPD, vous disposez d'un droit d'accès, de rectification, de suppression et d'opposition sur vos données personnelles. Vous pouvez exercer ces droits en nous contactant à l'adresse : contact@mynexvia.fr.</p>
+          <p>Conformément à la loi "Informatique et Libertés" et au RGPD, vous disposez d'un droit d'accès, de rectification, de suppression et d'opposition sur vos données personnelles. Vous pouvez exercer ces droits en nous contactant à l'adresse : contact@oxypure.fr.</p>
         </section>
       </div>
     </div>
@@ -644,9 +671,9 @@ const PrivacyPolicy = () => (
 const BookingModal = ({ isOpen, onClose, bookingContext }) => {
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedTime, setSelectedTime] = useState('');
-  const modalContentRef = React.useRef(null);
+  const modalContentRef = useRef(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isOpen) {
       setSelectedDate('');
       setSelectedTime('');
@@ -875,7 +902,7 @@ const BookingModal = ({ isOpen, onClose, bookingContext }) => {
                         </button>
                       ))}
                     </div>
-                    <input type="text" className="hidden" required value={selectedTime} onChange={() => {}} />
+                    <input type="text" className="hidden" required value={selectedTime} readOnly />
                   </div>
                 )}
               </div>
@@ -1356,7 +1383,7 @@ const PricingView = () => {
 export default function App() {
   const [currentPage, setCurrentPage] = useState('home');
 
-  React.useEffect(() => {
+  useEffect(() => {
     window.scrollTo(0, 0);
   }, [currentPage]);
 
