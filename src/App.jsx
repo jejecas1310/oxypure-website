@@ -15,8 +15,6 @@ import {
   ChevronRight, 
   Mail, 
   MapPin, 
-  Instagram, 
-  Facebook, 
   Check, 
   Calendar, 
   User, 
@@ -392,14 +390,6 @@ const Footer = ({ setCurrentPage }) => {
             <p className="text-slate-600 text-lg mb-8 max-w-sm">
               L'expert du nettoyage en profondeur. Nous redonnons vie à vos textiles et assainissons votre intérieur directement à domicile.
             </p>
-            <div className="flex space-x-4">
-              <a href="#" className="w-12 h-12 rounded-2xl bg-white/60 border border-white flex items-center justify-center text-slate-500 hover:text-blue-600 hover:bg-white hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                <Instagram className="w-5 h-5" />
-              </a>
-              <a href="#" className="w-12 h-12 rounded-2xl bg-white/60 border border-white flex items-center justify-center text-slate-500 hover:text-blue-600 hover:bg-white hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                <Facebook className="w-5 h-5" />
-              </a>
-            </div>
           </div>
 
           <div className="md:col-span-3">
