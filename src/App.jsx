@@ -658,14 +658,10 @@ const PrivacyPolicy = () => (
 
 // --- COMPOSANT MODAL DE RÉSERVATION ---
 const BookingModal = ({ isOpen, onClose, bookingContext }) => {
-  const [selectedDate, setSelectedDate] = useState('');
-  const [selectedTime, setSelectedTime] = useState('');
   const modalContentRef = useRef(null);
 
   useEffect(() => {
     if (isOpen) {
-      setSelectedDate('');
-      setSelectedTime('');
       document.body.style.overflow = 'hidden';
       if (modalContentRef.current) {
         modalContentRef.current.scrollTop = 0;
@@ -677,23 +673,6 @@ const BookingModal = ({ isOpen, onClose, bookingContext }) => {
   }, [isOpen]);
 
   if (!isOpen || !bookingContext) return null;
-
-  const dateObj = selectedDate ? new Date(selectedDate + 'T12:00:00') : null; 
-  const isMonday = dateObj ? dateObj.getDay() === 1 : false;
-  
-  const duration = bookingContext.type === 'vehicule' ? 2 : 1;
-
-  const getAvailableSlots = () => {
-    if (!selectedDate || isMonday) return [];
-    const maxStartHour = 18 - duration;
-    const slots = [];
-    for (let i = 9; i <= maxStartHour; i++) {
-      slots.push(`${i}h00`);
-    }
-    return slots;
-  };
-
-  const availableSlots = getAvailableSlots();
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
@@ -787,132 +766,19 @@ const BookingModal = ({ isOpen, onClose, bookingContext }) => {
             </div>
           </div>
 
-          {/* Colonne Droite : Formulaire (Blanc) */}
-          <div className="w-full md:w-[58%] p-6 md:p-8 lg:p-10 bg-white">
-            <h3 className="text-2xl font-bold text-slate-800 mb-2">Vos coordonnées</h3>
-            <p className="text-slate-500 mb-8 text-sm">Remplissez ce formulaire pour que nous puissions valider votre rendez-vous.</p>
-
-            <form className="space-y-5" onSubmit={(e) => { e.preventDefault(); alert("Demande envoyée avec succès ! (Simulation)"); onClose(); }}>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <div className="space-y-1.5">
-                  <label className="text-sm font-bold text-slate-700 ml-1">Nom & Prénom <span className="text-red-500">*</span></label>
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
-                      <User className="h-5 w-5" />
-                    </div>
-                    <input type="text" required className="block w-full pl-10 pr-3 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-slate-50" placeholder="Jean Dupont" />
-                  </div>
-                </div>
-                <div className="space-y-1.5">
-                  <label className="text-sm font-bold text-slate-700 ml-1">Téléphone <span className="text-red-500">*</span></label>
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
-                      <Phone className="h-5 w-5" />
-                    </div>
-                    <input type="tel" required className="block w-full pl-10 pr-3 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-slate-50" placeholder="06 12 34 56 78" />
-                  </div>
-                </div>
-              </div>
-
-              <div className="space-y-1.5">
-                <label className="text-sm font-bold text-slate-700 ml-1">Adresse de l'intervention <span className="text-red-500">*</span></label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
-                    <Home className="h-5 w-5" />
-                  </div>
-                  <input type="text" required className="block w-full pl-10 pr-3 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-slate-50" placeholder="N°, rue, bâtiment..." />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <div className="space-y-1.5">
-                  <label className="text-sm font-bold text-slate-700 ml-1">Code Postal / Ville <span className="text-red-500">*</span></label>
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
-                      <MapPin className="h-5 w-5" />
-                    </div>
-                    <input type="text" required className="block w-full pl-10 pr-3 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-slate-50" placeholder="75001 Paris" />
-                  </div>
-                </div>
-                <div className="space-y-1.5">
-                  <label className="text-sm font-bold text-slate-700 ml-1">Email</label>
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
-                      <Mail className="h-5 w-5" />
-                    </div>
-                    <input type="email" className="block w-full pl-10 pr-3 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-slate-50" placeholder="jean.dupont@email.com" />
-                  </div>
-                </div>
-              </div>
-
-              {/* Bloc Date & Créneaux Horaires */}
-              <div className="space-y-3 bg-slate-50 p-5 rounded-2xl border border-slate-100">
-                <div className="space-y-1.5">
-                  <label className="text-sm font-bold text-slate-700 ml-1">Date d'intervention souhaitée <span className="text-red-500">*</span></label>
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
-                      <Calendar className="h-5 w-5" />
-                    </div>
-                    <input 
-                      type="date" 
-                      required 
-                      min={new Date().toISOString().split('T')[0]} 
-                      value={selectedDate}
-                      onChange={(e) => {
-                        setSelectedDate(e.target.value);
-                        setSelectedTime('');
-                      }}
-                      className="block w-full pl-10 pr-3 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white" 
-                    />
-                  </div>
-                </div>
-
-                {selectedDate && isMonday && (
-                  <div className="text-red-600 text-sm font-medium p-3 bg-red-50 rounded-xl border border-red-100 animate-fade-in-up">
-                    Nous sommes fermés le Lundi. Veuillez sélectionner un jour entre le Mardi et le Dimanche.
-                  </div>
-                )}
-
-                {selectedDate && !isMonday && (
-                  <div className="pt-2 animate-fade-in-up">
-                    <label className="text-sm font-bold text-slate-700 ml-1 mb-3 flex items-center">
-                      <Clock className="w-4 h-4 mr-1.5 text-blue-500" /> 
-                      Heure de début souhaitée <span className="text-red-500 ml-1">*</span>
-                    </label>
-                    <div className="flex flex-wrap gap-2">
-                      {availableSlots.map(slot => (
-                        <button
-                          type="button"
-                          key={slot}
-                          onClick={() => setSelectedTime(slot)}
-                          className={`px-4 py-2 rounded-xl text-sm font-bold transition-all ${selectedTime === slot ? 'bg-blue-600 text-white shadow-md ring-2 ring-blue-600 ring-offset-1' : 'bg-white text-slate-600 hover:bg-blue-50 border border-slate-200 hover:border-blue-200'}`}
-                        >
-                          {slot}
-                        </button>
-                      ))}
-                    </div>
-                    <input type="text" className="hidden" required value={selectedTime} onChange={() => {}} />
-                  </div>
-                )}
-              </div>
-
-              <div className="space-y-1.5">
-                <label className="text-sm font-bold text-slate-700 ml-1">Précisions (Facultatif)</label>
-                <textarea rows="2" className="block w-full p-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-slate-50 resize-none" placeholder="Accès prise électrique, type de taches, etc..."></textarea>
-              </div>
-
-              <div className="pt-2 flex flex-col sm:flex-row gap-3">
-                <button type="submit" className="w-full sm:w-2/3 bg-blue-600 hover:bg-blue-700 text-white py-3.5 rounded-xl font-bold transition-colors shadow-lg shadow-blue-500/30 flex items-center justify-center group">
-                  Envoyer ma demande
-                  <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                </button>
-                <button type="button" onClick={onClose} className="w-full sm:w-1/3 bg-slate-100 hover:bg-slate-200 text-slate-700 py-3.5 rounded-xl font-bold transition-colors">
-                  Annuler
-                </button>
-              </div>
-            </form>
-
+          {/* Colonne Droite : Calendly Intégré */}
+          <div className="w-full md:w-[58%] bg-white min-h-[600px] relative">
+            <iframe 
+              src={bookingContext.type === 'vehicule' 
+                ? "hhttps://calendly.com/jejecassier/30min" 
+                : "https://calendly.com/jejecassier/categorie-maisons"} 
+              width="100%" 
+              height="100%" 
+              frameBorder="0"
+              className="absolute inset-0"
+            ></iframe>
           </div>
+
         </div>
       </div>
     </div>
