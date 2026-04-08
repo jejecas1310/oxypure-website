@@ -322,11 +322,11 @@ const BeforeAfterSection = ({ setCurrentPage }) => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
           {projects.map((project, index) => (
             <div key={index} className="group relative rounded-3xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-white/50 bg-white/60 backdrop-blur-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-              <div className="relative h-[250px] sm:h-[350px] w-full overflow-hidden bg-slate-100">
+              <div className="relative h-[250px] sm:h-[350px] w-full overflow-hidden bg-slate-200">
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="absolute inset-0 w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
                 />
                 
                 <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-transparent"></div>
@@ -770,7 +770,7 @@ const BookingModal = ({ isOpen, onClose, bookingContext }) => {
           <div className="w-full md:w-[58%] bg-white min-h-[600px] relative">
             <iframe 
               src={bookingContext.type === 'vehicule' 
-                ? "hhttps://calendly.com/jejecassier/30min" 
+                ? "https://calendly.com/jejecassier/categorie-vehicules" 
                 : "https://calendly.com/jejecassier/categorie-maisons"} 
               width="100%" 
               height="100%" 
@@ -929,7 +929,11 @@ const PricingView = () => {
 
   // Valeurs actives globales pour le résumé
   const activeTotal = isVehicule ? totalVehicule : totalMaison;
-  const activePlanName = isVehicule ? currentPlanObj.name : "Prestation sur mesure";
+  
+  // Correction : Déclaration de la variable activePlanName
+  const activePlanName = isVehicule 
+    ? (currentPlanObj ? currentPlanObj.name : "Forfait") 
+    : "Prestation sur mesure";
 
   // --- GESTION DE LA MODALE ---
   const handleBook = () => {
@@ -951,8 +955,8 @@ const PricingView = () => {
       }
       setBookingContext({
         type: 'maison',
-        planName: 'Nettoyage Maison & Textiles',
-        category: null, // Plus besoin de catégorie unique, tout est dans options
+        planName: activePlanName,
+        category: null,
         options: selectedMaisonDetails,
         total: totalMaison,
         travelFee: travelFee,
